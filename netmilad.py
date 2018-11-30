@@ -23,20 +23,24 @@ class ClosTopo(Topo):
         "Set up Core and Aggregate level, Connection Core - Aggregation level"
         corelist=[]
         aggrlist=[]
-        core=self.cores
-        aggr=core*self.fanout
+        core=cores
+        aggr=core*fanout
 
 
         for i in range(core):
           corelist.append("c"+str(i+1))
+        for k in range(len(corelist)):
+          self.addSwitch(corelist[k])
 
 
         for j in range(aggr):
           aggrlist.append("a"+str(j+1))
+        for y in range(len(aggrlist))
+          self.addSwitch(aggrlist[y])
 
-        for i in range(core):
-         for j in range(aggr):
-           self.addlink(corelist[i],aggrlist[j])
+        for i in range(len(corelist)):
+         for j in range(len(aggrlist)):
+           self.addLink(corelist[i],aggrlist[j])
 
 
         pass
@@ -44,28 +48,34 @@ class ClosTopo(Topo):
         "Set up Edge level, Connection Aggregation - Edge level "
         edgelist=[]
 
-        edge=aggr*self.fanout
+        edge=aggr*fanout
 
         for k in range(edge):
            edgelist.append("e"+str(k+1))
+        for f in range(len(edgelist)):
+           self.addSwitch(edgelist[f])
 
-        for i in range(aggr):
-            for j in range(edge):
-              self.addlink(aggrlist[i],edgelist[j])
+        for i in range(len(aggrlist)):
+            for j in range(len(edgelist)):
+              self.addLink(aggrlist[i],edgelist[j])
         pass
 
         "Set up Host level, Connection Edge - Host level "
         hostlist=[]
-        host=edge*self.fanout
-        for q in range( host):
-           host.append("h"+str(q+1))
-           print ("h"+str(q+1))
+        host=edge*fanout
+        for q in range(host):
+           hostlist.append("h"+str(q+1))
+        for g in range(len(hostlist)):
+           self.addHost(hostlist[g]) 
 
-        for i in range(edge):
-           for j in range(host):
-             self.addlink(edgelist[i],hostlist[j])
-             if j==fanout:
-                 break
+        count=0
+        m=0
+        for i in range(len(hostlist)):
+           self.addLink(hostlist[i],edgelist[m])
+           count=count+1
+           if count==fanout:
+               m=m+1
+               count=0 
         pass
 
 def setup_clos_topo(fanout=2, cores=1):
