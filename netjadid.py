@@ -146,7 +146,7 @@ class ClosTopo(Topo):
 
 
 
-        for y in range(len(aggrlist))
+        for y in range(len(aggrlist)):
 
 
 
