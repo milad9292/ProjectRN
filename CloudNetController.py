@@ -7,8 +7,7 @@ import traceback
 
 import csv
 
-#pox-specific
-imports
+#pox-specific imports
 from pox.core 
 import core
 from pox.openflow import ethernet
