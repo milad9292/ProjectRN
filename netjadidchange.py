@@ -103,7 +103,6 @@ def setup_clos_topo(fanout=2, cores=1):
     assert(cores>0)
     topo = ClosTopo(fanout, cores)
     net = Mininet(topo=topo, controller=lambda name: RemoteController('c0', "127.0.0.1"), autoSetMacs=True, link=TCLink)
-    net.build()
     net.start()
     time.sleep(20) #wait 20 sec for routing to converge
 
